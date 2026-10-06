@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Status: Birthday Edition</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #3fb950;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 20px;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .terminal {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      background-color: #3fb950;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="terminal">
+  <div id="output"></div>
+  <span class="cursor">&nbsp;</span>
+</div>
+
+<script>
+  const lines = [
+    "> Executing initialize_birthday.sh...",
+    "> Loading system specs for [Target: Vladislav]...",
+    "> [OK] Guitar Module: ACTIVE (Speed: +100, Chords: Mastered)",
+    "> [OK] Code Engine: OPTIMAL (Errors: 0, Coffee: Required)",
+    "> [OK] Chef Skills: LEGENDARY",
+    "> [OK] DIY / Lego Crafting: UNLOCKED",
+    "--------------------------------------------------",
+    "С Днём Рождения! 🎉",
+    " ",
+    "Ты человек с невероятным спектром талантов — от идеальных строк кода и крутых чертежей до первых уверенных аккордов на гитаре.",
+    "Пусть каждый твой новый проект 'компилируется' без ошибок, машина едет ровно, а вдохновение никогда не заканчивается!",
+    " ",
+    "> Status: Best Person Ever = TRUE"
+  ];
+
+  let lineIndex = 0;
+  let charIndex = 0;
+
+  function typeText() {
+    const outputEl = document.getElementById("output");
+
+    if (lineIndex < lines.length) {
+      let currentLine = lines[lineIndex];
+      
+      if (charIndex < currentLine.length) {
+        outputEl.innerHTML += currentLine.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeText, 30);
+      } else {
+        outputEl.innerHTML += "<br>";
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeText, 250);
+      }
+    }
+  }
+
+  typeText();
+</script>
+
+</body>
+</html>
+
