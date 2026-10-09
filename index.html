@@ -7,7 +7,7 @@
   <style>
     body {
       background-color: #0d1117;
-      color: #3fb950;
+      color: #e6edf3;
       font-family: 'Courier New', Courier, monospace;
       padding: 20px;
       margin: 0;
@@ -17,6 +17,16 @@
       max-width: 600px;
       margin: 0 auto;
     }
+
+    /* Цветовая палитра */
+    .c-blue   { color: #58a6ff; font-weight: bold; } /* Команды */
+    .c-green  { color: #3fb950; font-weight: bold; } /* Статусы [OK] */
+    .c-orange { color: #f0883e; font-weight: bold; } /* Акценты */
+    .c-purple { color: #bc8cff; font-weight: bold; } /* Фиолетовый / романтика */
+    .c-pink   { color: #ff7b72; font-weight: bold; } /* Розовый */
+    .c-yellow { color: #d29922; }                   /* Жёлтый */
+    .c-dim    { color: #8b949e; font-style: italic; }/* Серый подзаголовок */
+
     .cursor {
       display: inline-block;
       width: 8px;
@@ -27,6 +37,25 @@
       0%, 50% { opacity: 1; }
       51%, 100% { opacity: 0; }
     }
+
+    .btn-sound {
+      display: none;
+      margin-top: 25px;
+      background: linear-gradient(135deg, #238636, #1f6feb);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.2s;
+    }
+    .btn-sound:active {
+      transform: scale(0.96);
+    }
   </style>
 </head>
 <body>
@@ -34,50 +63,106 @@
 <div class="terminal">
   <div id="output"></div>
   <span class="cursor">&nbsp;</span>
+  <br>
+  <button id="soundBtn" class="btn-sound" onclick="toggleAudio()">▶ Включить трек дня</button>
+
+  <!-- Аудиофайл (название совпадает, если загрузишь song.mp3 рядом) -->
+  <audio id="bgAudio" src="song.mp3"></audio>
 </div>
 
 <script>
   const lines = [
-    "> Executing initialize_birthday.sh...",
-    "> Loading system specs for [Target: Vladislav]...",
-    "> [OK] Guitar Module: ACTIVE (Speed: +100, Chords: Mastered)",
-    "> [OK] Code Engine: OPTIMAL (Errors: 0, Coffee: Required)",
-    "> [OK] Chef Skills: LEGENDARY",
-    "> [OK] DIY / Lego Crafting: UNLOCKED",
-    "--------------------------------------------------",
-    "С Днём Рождения! 🎉",
-    " ",
-    "Ты человек с невероятным спектром талантов — от идеальных строк кода и крутых чертежей до первых уверенных аккордов на гитаре.",
-    "Пусть каждый твой новый проект 'компилируется' без ошибок, машина едет ровно, а вдохновение никогда не заканчивается!",
-    " ",
-    "> Status: Best Person Ever = TRUE"
+    '<span class="c-blue">> Executing initialize_birthday.sh...</span>',
+    '<span class="c-blue">> Loading memory_blocks & feelings...</span>',
+    '<span class="c-green">[OK]</span> <span class="c-yellow">Target:</span> Vladislav',
+    '<span class="c-green">[OK]</span> <span class="c-yellow">Connection:</span> Deep & Mutual',
+    '--------------------------------------------------',
+    '<span class="c-purple">Happy birthday, my love ❣️</span>',
+    ' ',
+    'Ты один из прекраснейших людей в моей жизни, я очень люблю тебя за все что есть в тебе и что ты делаешь для меня, для нас.',
+    ' ',
+    'Я не могу передать словами насколько я восхищаюсь тобой, твоим усердием, терпеливостью во многих моментах 🙃, твоими способности и умениями во всем буквально. Нет буквально дел, с которыми бы ты не справился. Даже при возникновении каких-либо трудностей, ты все равно пытаешься добиться цели.',
+    ' ',
+    'Ценю тебя за твою кропотливость и внимание к деталям, не только в подарках, а в целом ко всему, ко всем. Люблю тебя за твою эмпатию и умение сопереживать другим людям, твоя забота это отдельная ячейка в моем сердце.',
+    ' ',
+    'Ты в целом являешься моей составляющей на самом деле, не то что бы мы там половинки слоумейты, нет, просто за все время с тобой, мы очень сильно повлияли на друг друга, и к счастью, в лучшую сторону ❣️)',
+    ' ',
+    'Ты очень хороший человечек и я хочу пожелать тебе только чтобы все твои пожелания случались в срок и не просто так (папа купил), а именно чтобы ты сам пришел к своей <span class="c-orange">цели/мечте</span>.',
+    ' ',
+    'Это я тоже в тебе обожаю, что у тебя нет желания сидеть и ждать когда упадут с неба, <span class="c-green">захотел — сделал</span> это реальный кайф.',
+    ' ',
+    '<span class="c-dim">ну это так лирическое отступление и слова о том че я блюблю тебя сина много...</span>',
+    '--------------------------------------------------',
+    '<span class="c-pink">А так...</span>',
+    ' ',
+    'Дорогой мой, блюбимый мальчик с твоим днем рождения (пиздюк) 🤭',
+    'когда нибудь ты догонишь меня 🤭',
+    ' ',
+    'Я очень надеюсь что тебе понравится этот день, как мы его проведем.',
+    'И в целом желаю, чтобы все дни рождения стали не просто днем, а именно имели определенную ценность и желанность.',
+    'Я в свою очередь постараюсь этому посодействовать.',
+    ' ',
+    '<span class="c-orange">> oneloveonelife</span>'
   ];
 
   let lineIndex = 0;
   let charIndex = 0;
+  let isTag = false;
+  let currentTag = "";
 
   function typeText() {
     const outputEl = document.getElementById("output");
+    const btn = document.getElementById("soundBtn");
 
     if (lineIndex < lines.length) {
       let currentLine = lines[lineIndex];
-      
+
       if (charIndex < currentLine.length) {
-        outputEl.innerHTML += currentLine.charAt(charIndex);
+        let char = currentLine.charAt(charIndex);
+
+        if (char === '<') isTag = true;
+
+        if (isTag) {
+          currentTag += char;
+          if (char === '>') {
+            isTag = false;
+            outputEl.innerHTML += currentTag;
+            currentTag = "";
+          }
+        } else {
+          outputEl.innerHTML += char;
+        }
+
         charIndex++;
-        setTimeout(typeText, 30);
+        setTimeout(typeText, isTag ? 0 : 25);
       } else {
         outputEl.innerHTML += "<br>";
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeText, 250);
+        setTimeout(typeText, 220);
       }
+    } else if (btn) {
+      btn.style.display = "inline-block";
     }
   }
 
   typeText();
+
+  function toggleAudio() {
+    const audio = document.getElementById("bgAudio");
+    const btn = document.getElementById("soundBtn");
+
+    if (audio.paused) {
+      audio.play();
+      btn.innerHTML = "⏸ Пауза";
+      btn.style.background = "linear-gradient(135deg, #d29922, #f0883e)";
+    } else {
+      audio.pause();
+      btn.innerHTML = "▶ Включить трек дня";
+      btn.style.background = "linear-gradient(135deg, #238636, #1f6feb)";
+    }
+  }
 </script>
 
 </body>
 </html>
-
