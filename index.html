@@ -1,3 +1,11 @@
+Ага, поняла! На этом скриншоте мобильное приложение открыло меню репозитория, где можно создать файл (Create file), но не редактировать существующий.
+Сделай вот так — это займет ровно 10 секунд и избавит от лишних поисков:
+ * Нажми кнопку Create file на этом же экране (рядом с плюсиком).
+ * В поле имени файла введи точное название: index.html
+ * Вставь в поле кода наш готовый код (я продублировала его прямо под этим сообщением).
+ * Нажми кнопку сохранения (в правом верхнем углу). GitHub сам спросит: «Такой файл уже есть, заменить его?» — согласись и подтверди замену (Commit changes).
+Всё! После этого песня будет играть прямо с интернета через красивую кнопку, а текст будет бежать строчка за строчкой.
+Вот готовый код для копирования:
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,13 +27,13 @@
     }
 
     /* Цветовая палитра */
-    .c-blue   { color: #58a6ff; font-weight: bold; } /* Команды */
-    .c-green  { color: #3fb950; font-weight: bold; } /* Статусы [OK] */
-    .c-orange { color: #f0883e; font-weight: bold; } /* Акценты */
-    .c-purple { color: #bc8cff; font-weight: bold; } /* Фиолетовый / романтика */
-    .c-pink   { color: #ff7b72; font-weight: bold; } /* Розовый */
-    .c-yellow { color: #d29922; }                   /* Жёлтый */
-    .c-dim    { color: #8b949e; font-style: italic; }/* Серый подзаголовок */
+    .c-blue   { color: #58a6ff; font-weight: bold; }
+    .c-green  { color: #3fb950; font-weight: bold; }
+    .c-orange { color: #f0883e; font-weight: bold; }
+    .c-purple { color: #bc8cff; font-weight: bold; }
+    .c-pink   { color: #ff7b72; font-weight: bold; }
+    .c-yellow { color: #d29922; }
+    .c-dim    { color: #8b949e; font-style: italic; }
 
     .cursor {
       display: inline-block;
@@ -46,7 +54,7 @@
       border: none;
       padding: 12px 22px;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
@@ -64,10 +72,9 @@
   <div id="output"></div>
   <span class="cursor">&nbsp;</span>
   <br>
-  <button id="soundBtn" class="btn-sound" onclick="toggleAudio()">▶ Включить трек дня</button>
+  <button id="soundBtn" class="btn-sound" onclick="toggleAudio()">▶ Chris Isaak — Can't Help Falling In Love</button>
 
-  <!-- Аудиофайл (название совпадает, если загрузишь song.mp3 рядом) -->
-  <audio id="bgAudio" src="song.mp3"></audio>
+  <audio id="bgAudio" src="https://ia800902.us.archive.org/29/items/ChrisIsaakCantHelpFallingInLove/Chris%20Isaak%20-%20Can%27t%20Help%20Falling%20In%20Love.mp3" preload="auto"></audio>
 </div>
 
 <script>
@@ -81,7 +88,7 @@
     ' ',
     'Ты один из прекраснейших людей в моей жизни, я очень люблю тебя за все что есть в тебе и что ты делаешь для меня, для нас.',
     ' ',
-    'Я не могу передать словами насколько я восхищаюсь тобой, твоим усердием, терпеливостью во многих моментах 🙃, твоими способности и умениями во всем буквально. Нет буквально дел, с которыми бы ты не справился. Даже при возникновении каких-либо трудностей, ты все равно пытаешься добиться цели.',
+    'Я не могу передать словами насколько я восхищаюсь тобой, твоим усердием, терпеливостью во многих моментах 🙃, твоими способностями и умениями во всем буквально. Нет буквально дел, с которыми бы ты не справился. Даже при возникновении каких-либо трудностей, ты все равно пытаешься добиться цели.',
     ' ',
     'Ценю тебя за твою кропотливость и внимание к деталям, не только в подарках, а в целом ко всему, ко всем. Люблю тебя за твою эмпатию и умение сопереживать другим людям, твоя забота это отдельная ячейка в моем сердце.',
     ' ',
@@ -158,7 +165,7 @@
       btn.style.background = "linear-gradient(135deg, #d29922, #f0883e)";
     } else {
       audio.pause();
-      btn.innerHTML = "▶ Включить трек дня";
+      btn.innerHTML = "▶ Chris Isaak — Can't Help Falling In Love";
       btn.style.background = "linear-gradient(135deg, #238636, #1f6feb)";
     }
   }
@@ -166,3 +173,4 @@
 
 </body>
 </html>
+
